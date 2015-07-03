@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@include file="/commons/include.jsp"%>
 <script type="text/javascript">
-	/* 	。。。。。。 */
+		
 	var submitNow = function($dialog, $grid, $pjq) {
 		var url;
 
