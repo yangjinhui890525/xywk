@@ -141,16 +141,6 @@ $(function() {
 				text : '添加',
 				iconCls:'icon-add',
 				handler : function() {
-				/* 	 var d=$("#form",dialog.find('iframe').get(0).contentWindow.document);
-				    $("#form",dialog.find('iframe').get(0).contentWindow.document).form('submit', {
-					url : fq.contextPath+'/xy/category/editCategory_ok',
-					success : function(d) {
-						alert("d"+"-----")
-						dialog.window('close');
-					} 
-					 });   */
-					//addrow("添加资源分类", '/xy/category/editCategory_ok', dataTB, 400, 300)
-					//dialog.window('close');
 					var f = dialog.find('#form');
 					f.submit();
 				}
@@ -158,6 +148,11 @@ $(function() {
 ]
 		});
 	}
+		
+		function add(){
+			var url = '/xy/category/addCategory?pid=${pid}';
+			addrow('添加管理员',url,'dataTB',600,400);
+		}
 </script>
 <div>
 	<div style="width: 100%; text-align: center;">
@@ -168,7 +163,7 @@ $(function() {
 					<table style="text-align: center;">
 						<tr style="line-height: 30px;">
 							<td><div class="datagrid-btn-separator"></div></td>
-							<td><a onclick="addFun();" href="javascript:void(0);"
+							<td><a onclick="add();" href="javascript:void(0);"
 								class="toolbar-btn"
 								data-options="plain:true,iconCls:'pencil_add'">添加资源分类</a></td>
 							<td><div class="datagrid-btn-separator"></div></td>
