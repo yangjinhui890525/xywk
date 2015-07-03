@@ -186,8 +186,9 @@ $(function() {
 				<td id="td1" style="display: none; cursor: pointer;">
 					<div id="tdiv1" style="position: relative; width: 124px; height: 175px;"
 						title="点击进行目录及资源管理">
-						<img src="${pageContext.request.contextPath}/images/book.jpg" width="124" height="176" alt="">
-						 <span id="sp1" style="position: absolute; top: 60px; left: 5px; right: 5px; font-weight: bold;">
+						<img src="${pageContext.request.contextPath}/images/book.jpg"
+							width="124" height="176" alt=""> <span id="sp1"
+							style="position: absolute; top: 60px; left: 5px; right: 5px; font-weight: bold;">
 						</span>
 					</div>
 				</td>
