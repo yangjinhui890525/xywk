@@ -9,4 +9,7 @@ public interface AppConstants {
   int USER_COMM_ADMIN = 1;//普通管理员
   
   int USER_COMM_USER = 2;//普通用户
+  
+  
+  
 }
