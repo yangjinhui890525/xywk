@@ -318,6 +318,31 @@ fq.modalDialog = function(options) {
 	return $('<div/>').dialog(opts);
 };
 
+fq.modalDialog_NoFrame= function(options) {
+	if (fq.modalDialog_NoFrame.handler == undefined) {// 避免重复弹出
+			var width = options.width ? options.width : 640;
+			var height = options.height ? options.height : 480;
+		var opts = $.extend({
+			title : '',
+			width : width,
+			height : height,
+			modal : true,
+			onClose : function() {
+				fq.modalDialog_NoFrame.handler = undefined;
+				$(this).dialog('destroy');
+			}/*,
+			onOpen : function() {
+				parent.$.messager.progress({
+					title : '提示',
+					text : '数据处理中，请稍后....'
+				});
+			}*/
+		}, options);
+		opts.modal = true;// 强制此dialog为模式化，无视传递过来的modal参数
+		return fq.modalDialog_NoFrame.handler = $('<div/>').dialog(opts);
+	}
+};
+
 /**
  * 更换主题
  * 
