@@ -7,6 +7,7 @@
  
  
  function loadGrid(queryData){
+	 $("#search").show();
 	 $('#userTable').datagrid({
 			title:'管理员列表', //标题
 			method:'post',
@@ -29,19 +30,19 @@
 				text:'添加',
 				iconCls:'icon-add',
 				handler:function(){
-					addrow('添加管理员','/xy/user/addAdminUser','userTable',600,400);
+					addrow('添加管理员','/xy/user/editAdminUser','userTable',600,400);
 				}
 			},'-',{
 				text:'编辑',
 				iconCls:'icon-edit',
 				handler:function(){
-					updaterow('编辑用户','/system/user/editUser','userTable','ID',400,300);
+					updaterow('编辑用户','/xy/user/editAdminUser','userTable','ID',400,300);
 				}
 			},'-',{
 				text:'删除',
 				iconCls:'icon-remove',
 				handler:function(){
-					deleterow('server/delete','userTable','ID');
+					deleterow('${pageContext.request.contextPath}/xy/user/deleteAdminUser','userTable','ID');
 				}
 			},'-',{
 				text:'设置用户状态',
@@ -64,13 +65,27 @@
 			}
 		});
  }
-
+ function searchList() {
+		var USERNAME = $("#USERNAME").val();
+		var TRUENAME=$("#TRUENAME").val();
+		var queryData = {
+				USERNAME : USERNAME,
+				TRUENAME : TRUENAME,
+		};
+		loadGrid(queryData)
+	}
  
 
 
 	</script>
 	
-	
+	<div id="search" class="search" style="height: 54px; display: none;">
+				<div style="margin-left: 10px;">
+					&nbsp;&nbsp; 用户名： <input name="USERNAME" id="USERNAME" >
+					&nbsp;&nbsp; 姓名： <input name="TRUENAME" id="TRUENAME" >
+					<a href="#" class="easyui-linkbutton" id="searchBtn"onclick="searchList();">查询</a>
+				</div>
+	</div>
 	<div style="padding:10">
 		<table id="userTable">
 			<thead>

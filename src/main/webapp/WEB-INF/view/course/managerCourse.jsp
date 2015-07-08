@@ -34,7 +34,6 @@ function initTree() {
 					});
 }
  function initResData(id, name, pid) {
-	 alert(id);
 	gctgId = id;
 	gpartId = pid;
 
@@ -45,17 +44,12 @@ function initTree() {
 		category_id : id,
 		class_id : pid
 	};
-	
-	if(id >= 100){
-		getVideoData(queryData);
-	}else{
-		getData(queryData);	
-	}
-	
+	$("#category_id").val(id);
+		//getData(queryData);	
+		loadGrid(queryData);
 } 
  
  function getData(queryData) {
-	    alert("come");
 		var url = fq.contextPath+'/xy/course/getCourseDataJson';
 		$('#dataGrid').datagrid(
 						{
@@ -147,7 +141,111 @@ function initTree() {
 						});
 	}
  
- 
+ function loadGrid(queryData){
+	 $('#courseTable').datagrid({
+			title:'资源科目列表', //标题
+			method:'post',
+			iconCls:'icon-edit', //图标
+			singleSelect:false, //多选
+			height:'auto', //高度
+			fitColumns: true, //自动调整各列，用了这个属性，下面各列的宽度值就只是一个比例。
+			striped: true, //奇偶行颜色不同
+			collapsible:true,//可折叠
+			url:fq.contextPath+'/xy/course/getCourseDataJson', //数据来源
+			remoteSort: true, //服务器端排序
+			idField:'ID', //主键字段
+			queryParams:queryData, //查询条件
+			pagination:true, //显示分页
+			rownumbers:true, //显示行号
+			frozenColumns:[[
+			       {field:'ck',checkbox:true}
+			]],
+			toolbar:[{
+				text:'添加',
+				iconCls:'icon-add',
+				handler:function(){
+					addrow('添加资源科目','/xy/course/editCourse?CATEGORY_ID='+queryData.category_id,'courseTable',400,300);
+				}
+			},'-',{
+				text:'编辑',
+				iconCls:'icon-edit',
+				handler:function(){
+					updaterow('编辑添加资源科目','/xy/course/editCourse','courseTable','ID',400,300);
+				}
+			},'-',{
+				text:'删除',
+				iconCls:'icon-remove',
+				handler:function(){
+					deleterow(fq.contextPath+'/xy/course/deleteCourse','courseTable','ID');
+				}
+			},'-',{
+				text:'设置用户状态',
+				iconCls:'icon-edit',
+				handler:function(){
+					updateValidrow('manager/user/setUserValid','courseTable','ID');
+				}
+			},'-',
+			{
+				text:'章节管理',
+				iconCls:'icon-add',
+				handler:function(){
+					var rows = $('#courseTable').datagrid('getSelections');
+					if(rows.length==0){
+						$.messager.alert('提示',"请选择要编辑的数据",'info');
+						return;
+					}
+					if(rows.length > 1){
+						$.messager.alert('提示',"只能选择一行数据进行编辑",'info');
+						return;
+					}
+					
+					var event={COURSE_ID:rows[0]['ID'],name:rows[0]['NAME']}
+					operation(event);
+				}},'-'
+			],
+			
+			onBeforeLoad : function(param) {
+				parent.$.messager.progress({
+					text : '数据加载中....'
+				});
+			},
+			onLoadSuccess : function(data) {
+				$('#courseTable').datagrid('clearSelections'); //一定要加上这一句，要不然datagrid会记住之前的选择状态，删除时会出问题
+				$('.iconImg').attr('src', fq.pixel_0);
+				parent.$.messager.progress('close');
+			}
+		});
+ }
+ function operation(event) {
+		var name = event.name;
+		var COURSE_ID = event.COURSE_ID;
+		var encname = encodeURI(name);
+		var url = fq.contextPath+'/xy/chapter/openChataterList?COURSE_ID='+COURSE_ID;
+		//self.parent.addTab(name+'资源管理',url,'');
+		var tabs = parent.$('#mainTabs');
+		var opts = {
+			title : name+"的章节管理",
+			closable : true,
+			/* iconCls : node.iconCls, */
+			content : fq.formatString('<iframe src="{0}" allowTransparency="true" style="border:0;width:100%;height:99%;" frameBorder="0"></iframe>', url),
+			border : false,
+			fit : true
+		};
+		if (tabs.tabs('exists', name+"的章节管理")) {
+			tabs.tabs('select', name+"的章节管理");
+		} else {
+			tabs.tabs('add', opts);
+		}
+	}
+ function searchList() {
+		var NAME = $("#name").val();
+		var category_id=$("#category_id").val();
+		var queryData = {
+			NAME : NAME,
+			category_id : category_id,
+		};
+		loadGrid(queryData)
+	}
 </script>
 <html>
 <head></head>
@@ -168,29 +266,39 @@ function initTree() {
 	</div>
 	<div region="center">
 		<div data-options="region:'center',border:false" id="flList">
-
-			<div id="search" class="search" style="height: 100px; display: none;">
+			<div id="search" class="search" style="height: 54px; display: none;">
 				<div style="margin-left: 10px;">
-
-					时间： <input name="START_TIME" id="START_TIME"
-						onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'})">
-					&nbsp;至&nbsp; <input name="END_TIME" id="END_TIME"
-						onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'});">&nbsp;
-					&nbsp;&nbsp;<br> 名称： <input name="name" id="name">
-					&nbsp;&nbsp; 状态： <select name="status" id="status"
-						style="width: 160px; height: 40px;">
-						<option value="-1">&nbsp;</option>
-						<option value="0">待推送</option>
-						<option value="1">已推送</option>
-					</select> &nbsp; &nbsp; <!-- <a href="#" class="easyui-linkbutton" id="searchBtn"
-						onclick="searchList();">查询</a> -->
+					&nbsp;&nbsp; 名称： <input name="name" id="name" >
+					<input type="hidden" value="${CATEGORY_ID}" name="category_id" id="category_id">
+					<a href="#" class="easyui-linkbutton" id="searchBtn"onclick="searchList();">查询</a>
 				</div>
-
 			</div>
 
-			<table id="dataGrid">
+		<!-- 	<table id="dataGrid">
 				<h2 id="titleId" align="center">请点击左侧课堂板书、补充资料、课后练习及其他获取资源！</h2>
-			</table>
+			</table> -->
+			
+				<div style="padding:10">
+					<table id="courseTable">
+						<thead>
+							<tr>
+								<th data-options="field:'ID',title:'资源科目ID',width:10" sortable="true"></th>
+								<th data-options="field:'NAME',title:'名称',width:15" sortable="true"></th>
+								<!-- <th data-options="field:'CATEGORY_ID',title:'',width:15"></th> -->
+								<th data-options="field:'ORDER_NUM',title:'排序字段',width:10"></th>
+								<th data-options="field:'C_URL',title:'资料地址',width:10,formatter:function(value,row,index){if(value==1) return 'Y';else return 'N';}" sortable="true"></th>
+								<th data-options="field:'C_ICON',title:'资料图片',width:10"></th>
+								<th data-options="field:'DESCRIPTION',title:'描述',width:10"></th>
+								<th data-options="field:'C_SIZE',title:'资料大小',width:10"></th>
+								<th data-options="field:'C_DOWN_COUNT',title:'下载次数',width:10"></th>
+								<th data-options="field:'CONTENT_LIST',title:'目录',width:10"></th>
+								<th data-options="field:'TYPE',title:'类型',width:10"></th>
+							</tr>
+						</thead>	
+					</table>
+				</div>
+			
+			
 		</div>
 	</div>
 

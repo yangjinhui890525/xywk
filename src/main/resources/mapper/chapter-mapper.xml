@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ChapterMapper">
+	<select id="getChapterList" resultType="java.util.HashMap">        
+		select * from tbl_chapter where COURSE_ID=${COURSE_ID}
+	<!-- 	 <if test="sort != null">
+			order by ${sort} ${order}
+		</if>  -->
+	</select>
+		<select id="getChapterByID" resultType="java.util.HashMap">        
+		select * from tbl_chapter where ID=${ID}
+	</select>
+	
+</mapper>

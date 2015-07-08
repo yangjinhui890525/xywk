@@ -151,8 +151,71 @@ $(function() {
 		
 		function add(){
 			var url = '/xy/category/addCategory?pid=${pid}';
-			addrow('添加管理员',url,'dataTB',600,400);
+			addrow('添加资源分类',url,'dataTB',600,400);
 		}
+		function editFun()
+		{
+		 	var size=$('input[type="checkbox"]:checked').length;
+			if(size==0)
+			{
+				$.messager.alert('提示','请选择一个资源分类', 'info');
+			}
+			else if(size>1)
+			{
+				$.messager.alert('提示','只能选择一个资源分类', 'info');
+			}
+			else
+			{
+				var url = '/xy/category/editCategory?id='+$('input[type="checkbox"]:checked').val();
+				editrow('编辑资源分类',url,'dataTB',600,400);
+			}
+
+		}
+		function deleteFun()
+		{
+			var size=$('input[type="checkbox"]:checked').length;
+			if(size==0)
+			{
+				$.messager.alert('提示','请选择一个资源分类', 'info');
+			}
+			else 
+			{
+				$.messager.confirm("确认是否删除","删除信息",function(flag){
+					if(flag)
+					{
+						var value="";
+						$('input[type="checkbox"]:checked').each(function(){
+							value=value+$(this).val()+",";
+						});
+						var url =  fq.contextPath+'/xy/category/deleteCategory?ids='+value;
+						$.ajax({
+								type:"post",
+								url:url,
+								success:function(data)
+								{
+									if(data.success)
+									{
+										//  var currTab =  self.parent.$('#mainTabs').tabs('getSelected'); //获得当前tab
+										updateTabs();	
+	
+									}
+									else
+									{
+										$.messager.alert('提示','删除资源分类失败', 'info');
+										
+									}
+								}
+							
+							});
+						
+					}
+					else
+					{
+					}
+				});
+			}
+		}
+		
 </script>
 <div>
 	<div style="width: 100%; text-align: center;">
@@ -222,13 +285,13 @@ $(function() {
 			</tr>
 			<tr align="center" id="dataTropt" style="display: none;">
 				<td id="tdopt1" style="display: none; padding-bottom: 30px;"><input
-					type="checkbox" id="ck1"></td>
+					type="checkbox" id="ck1" name="category_name"></td>
 				<td id="tdopt2" style="display: none; padding-bottom: 30px;"><input
-					type="checkbox" id="ck2"></td>
+					type="checkbox" id="ck2" name="category_name"></td>
 				<td id="tdopt3" style="display: none; padding-bottom: 30px;"><input
-					type="checkbox" id="ck3"></td>
+					type="checkbox" id="ck3" name="category_name"></td>
 				<td id="tdopt0" style="display: none; padding-bottom: 30px;"><input
-					type="checkbox" id="ck0"></td>
+					type="checkbox" id="ck0" name="category_name"></td>
 
 			</tr>
 		</table>

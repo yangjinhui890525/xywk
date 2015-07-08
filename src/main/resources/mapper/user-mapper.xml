@@ -5,9 +5,21 @@
 <mapper namespace="UserMapper">
 	<select id="getAdminUserList" resultType="java.util.HashMap">        
 		select * from tbl_user where TYPE = 1
+		<if test="USERNAME != null">
+			AND USERNAME LIKE '%${USERNAME}%' 
+		</if>
+		<if test="TRUENAME != null">
+			AND TRUENAME LIKE '%${TRUENAME}%' 
+		</if>
 		<if test="sort != null">
 			order by ${sort} ${order}
 		</if>
 	</select>
-	
+	<select id="getUserByID" resultType="java.util.HashMap">        
+		select * from tbl_user where ID = ${ID}
+	</select>
+	<select id="getUserByUserName" resultType="java.util.HashMap">        
+		select * from tbl_user where USERNAME = #{USERNAME}
+	</select>
+
 </mapper>

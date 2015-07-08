@@ -5,6 +5,9 @@ import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.sf.json.JSON;
+import net.sf.json.JSONObject;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,12 +34,18 @@ public class UserController {
   @RequestMapping(value="getAdminUserList")
   @ResponseBody
   public HashMap<String, Object> getAdminUserList(DataGridModel dm,HttpServletRequest request,HttpServletResponse response){
-      HashMap<String, Object> resMap = userService.getAdminUserList(dm, null);
+	  HashMap<String, Object> params=ParamUtils.getFilterParams(request);
+      HashMap<String, Object> resMap = userService.getAdminUserList(dm, params);
       return resMap;
   }
   
-  @RequestMapping(value="addAdminUser")
-  public String addAdminUser(){
+  @RequestMapping(value="editAdminUser")
+  public String addAdminUser(HttpServletRequest request){
+	 
+	  HashMap<String,Object> user = ParamUtils.getFilterParams(request);
+	  if(user.get("ID")!=null)
+		  user=userService.getUserByID(user);
+	  request.setAttribute("user", user);
     return "user/addAdminUser";
   }
   
@@ -49,8 +58,16 @@ public class UserController {
       HashMap<String,String> user = ParamUtils.getParameters(request);
       if(user!=null){
         user.put("TYPE",AppConstants.USER_COMM_ADMIN+"");
-        userService.saveUser(user);
       }
+      if(user.get("ID")==null)
+      {
+    	  HashMap<String,Object> user_is_exit=userService.getUserByUserName(user);
+    	  if(user_is_exit.size()>0);
+          ret.setSuccess(false);
+          ret.setMsg("user_exist");
+          return ret;
+      }
+      userService.saveUser(user);
       ret.setSuccess(true);
     } catch (Exception e) {
       ret.setSuccess(false);
@@ -58,7 +75,22 @@ public class UserController {
     }
     return ret;
   }
-  
+  @RequestMapping(value="deleteAdminUser")
+  @ResponseBody
+  public RetVO deleteAdminUser(HttpServletRequest request)
+  {
+	  RetVO ret = new RetVO();
+	  try {
+		  int IDS[]=ParamUtils.getIntParameters(request, "PK", 0);
+		  boolean flag=userService.deleteUser(IDS);
+		  ret.setSuccess(true);
+	  }catch (Exception e)
+	  {
+		  ret.setSuccess(false);
+	      ret.setMsg("error："+e.getMessage());
+	  }
+	  return ret;
+  }
   
   
 }

@@ -67,7 +67,31 @@ function addrow(title, url, datagrid, width, height) {
 }
 
 
-
+function editrow(title, url, datagrid, width, height) {
+	title = title ? title : '';
+	datagrid = datagrid ? datagrid : 'datagrid';
+	width = width ? width : 400;
+	height = height ? height : 300;
+	dialog = parent.fq.modalDialog({
+		title : title,
+		url : fq.contextPath + url,
+		width : width,
+		height : height,
+		buttons : [ {
+			text:'取消',
+			iconCls:'icon-no',
+			handler:function(){
+				dialog.window('close');
+			}
+			},{
+			text : '保存',
+			iconCls:'icon-ok',
+			handler : function() {
+				dialog.find('iframe').get(0).contentWindow.submitForm(dialog,$("#"+datagrid), parent.$);
+			}
+		} ]
+	});
+}
 
 
 
@@ -98,7 +122,7 @@ function updaterow(title,url,datagrid,pk,width,height){
 				dialog.window('close');
 			}
 			},{
-			text : '编辑',
+			text : '保存',
 			iconCls:'icon-ok',
 			handler : function() {
 				dialog.find('iframe').get(0).contentWindow.submitForm(dialog,$("#"+datagrid), parent.$);
@@ -175,7 +199,6 @@ function deleterow(url,datagrid,pkName){
         		else
         			ps += "&PK="+pkValue;
         	});
-        	//alert(ps);
         	$.post(url+ps,function(data){
 	        	$('#'+datagrid).datagrid('reload'); 
         		$.messager.alert('提示','数据删除成功','info');
@@ -325,5 +348,25 @@ StringBuffer.prototype.del = function(num)
     this._strings = [];   
     this._strings.push(str);   
 };  
-
+function updateTabs()
+{
+	  var panel = self.parent.$("#mainTabs").tabs('getSelected').panel('panel');
+			var frame = panel.find('iframe');
+			try {
+			if (frame.length > 0) {
+			for (var i = 0; i < frame.length; i++) {
+			frame[i].contentWindow.document.write('');
+			frame[i].contentWindow.close();
+			frame[i].src = frame[i].src;
+			}
+			if (navigator.userAgent.indexOf("MSIE") > 0) {// IE特有回收内存方法
+				try {
+						CollectGarbage();
+				} catch (e) {
+				}
+													}
+												}
+											} catch (e) {
+											}							
+}
 

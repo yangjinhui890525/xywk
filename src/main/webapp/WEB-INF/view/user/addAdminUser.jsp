@@ -18,7 +18,15 @@
 				$grid.datagrid('reload');
 				$dialog.dialog('destroy');
 			} else {
-				$pjq.messager.alert('提示','操作失败', 'error');
+				if(result.msg=="user_exist")
+				{
+					$pjq.messager.alert('提示','用户已存在！', 'error');
+				}
+				else
+				{
+					$pjq.messager.alert('提示','操作失败', 'error');
+				}
+				
 			}
 		}, 'json');
 	};
@@ -34,30 +42,30 @@
 </head>
 <body>
 	<form method="post" class="form">
+		<input type="hidden" value="${user['ID']}" name="ID">
 		<fieldset>
 			<legend>管理员信息</legend>
 			<table class="table" style="width: 100%;">
 				<tr>
 					<th>用户名</th>
-					<td><input name="USERNAME"  type="text" class="easyui-validatebox" data-options="required:true"/>
+					<td><input name="USERNAME"  type="text" class="easyui-validatebox" data-options="required:true" value="${user['USERNAME']}"/>
 					</td>
 				</tr>
 				<tr>
 					<th>密码</th>
-					<td><input name="PASSWORD" type="password" class="easyui-validatebox" data-options="required:true"/>
+					<td><input name="PASSWORD" type="password" class="easyui-validatebox" data-options="required:true"  value="${user['PASSWORD']}"/>
 					</td>
 				</tr>
 				<tr>
 				<th>姓名</th>
-				<td><input name="TRUENAME" class="easyui-validatebox" data-options="required:true" /></td>
+				<td><input name="TRUENAME" class="easyui-validatebox" data-options="required:true"  value="${user['TRUENAME']}"/></td>
 				</tr>
 				<tr>
 					<th>手机号码</th>
 					<td>
-						<input name="MPHONE" type="text"/>
+						<input name="MPHONE" type="text" value="${user['MPHONE']}"/>
 					</td>
 				</tr>
-				
 			</table>
 		</fieldset>
 	</form>

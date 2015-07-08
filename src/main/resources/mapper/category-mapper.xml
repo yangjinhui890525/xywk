@@ -12,5 +12,8 @@
 	<select id="getCategoryTree" resultType="java.util.HashMap">        
 		select * from tbl_category order by ORDER_NUM desc
 	</select>
+	<select id="getCategoryByID" resultType="java.util.HashMap">        
+		select * from tbl_category where ID=${id}
+	</select>
 	
 </mapper>

@@ -7,4 +7,7 @@ import cn.com.iactive.db.DataGridModel;
 
 public interface ICourseService {
 	public HashMap<String, Object> getCourseDateByCategroyID(DataGridModel dm, HashMap<String, Object> params);
+	public HashMap<String, Object> getCourseByID(HashMap<String, Object> params);
+	public boolean save(HashMap<String, Object> course);
+	public void deleteCourses(String[] pKS);
 }

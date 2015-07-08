@@ -105,6 +105,11 @@
 			<version>2.5</version>
 			<scope>provided</scope>
 		</dependency>
+	<!-- 	<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>2.2.1-b03</version>
+		</dependency> -->
 		<!-- mysql的数据库驱动包 -->
 		<dependency>
 			<groupId>mysql</groupId>

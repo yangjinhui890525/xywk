@@ -89,4 +89,25 @@ public class CategoryService implements ICategoryService {
 		  return treeList;
 		  
 	  }
+	/**
+	 *根据ID查询
+	 */
+	public HashMap<String, Object> getCategoryById(int id) {
+		HashMap<String, Object> params=new HashMap<String, Object>();
+		params.put("id", id);
+		List<HashMap<String, Object>> list=iacDB.getList("getCategoryByID", params);
+		if(list.size()>0)
+			return list.get(0);
+		return null;
+	}
+	public boolean deleteCategory(int[] ids)
+	{
+		for(int id:ids)
+		{
+			HashMap<String, Object> params=new HashMap<String, Object>();
+			params.put("ID", id);
+			iacDB.deleteDynamic(DBTableConstants.TBL_CATEGORY_NAME, params);
+		}
+		return true;
+	}
 }

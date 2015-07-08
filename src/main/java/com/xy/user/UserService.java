@@ -21,8 +21,38 @@ public class UserService implements IUserService{
   }
 
   public boolean saveUser(HashMap<String, String> user) {
-    return iacDB.insertDynamic(DBTableConstants.TBL_USER_NAME, user);
+	  if(user.get("ID")==null)
+		  return iacDB.insertDynamic(DBTableConstants.TBL_USER_NAME, user);
+	  else
+	  {
+		  return iacDB.updateDynamic(DBTableConstants.TBL_USER_NAME, DBTableConstants.TBL_USER_PK, user);
+	  }
+	  
+    
   }
+
+@Override
+public HashMap<String, Object> getUserByID(HashMap<String, Object> user) {
+	HashMap<String, Object>  map=iacDB.get("UserMapper.getUserByID", user);
+	return map;
+}
+
+@Override
+public boolean deleteUser(int[] iDS) {
+	for(int id:iDS)
+	{
+		HashMap<String, Object> params=new HashMap<String, Object>();
+		params.put("ID", id);
+		iacDB.deleteDynamic(DBTableConstants.TBL_USER_NAME, params);
+	}
+	return true;
+}
+
+@Override
+public HashMap<String, Object> getUserByUserName(HashMap<String, String> user) {
+	HashMap<String, Object>  map=iacDB.get("UserMapper.getUserByUserName", user);
+	return map;
+}
   
   
 

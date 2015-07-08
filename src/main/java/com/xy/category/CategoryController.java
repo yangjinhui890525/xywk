@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -49,15 +50,25 @@ public class CategoryController {
 		request.setAttribute("category", category);
 		return "category/editCategroy";
 	}
+	@RequestMapping(value="editCategory")
+	public String editCategory(int id,HttpServletRequest request)
+	{
+		HashMap<String, Object> category=categoryService.getCategoryById(id);
+		request.setAttribute("category", category);
+		return "category/editCategroy";
+	}
 	@RequestMapping(value="editCategory_ok")
-	public String editCategory_ok(HttpServletRequest request,String name,int pid,int order_num)
+	@ResponseBody
+	public JSONObject editCategory_ok(HttpServletRequest request,String name,int pid,int order_num)
 	{
 		HashMap<String, Object> category=new HashMap<String, Object>();
 		category.put("NAME",name);
 		category.put("PID",pid);
 		category.put("ORDER_NUM",order_num);
 		categoryService.insertCategory(category);
-		return null;
+		JSONObject jsonObject=new JSONObject();
+		jsonObject.put("success", true);
+		return jsonObject;
 	}
 	@RequestMapping(value="getCategoryTree")
 	@ResponseBody
@@ -65,5 +76,21 @@ public class CategoryController {
 	{
 		List<Tree> list=categoryService.getCategoryTree();
 		return list;
+	}
+	@RequestMapping(value="deleteCategory")
+	@ResponseBody
+	public JSONObject deleteCategory(String ids)
+	{
+		String[] id=ids.split(",");
+		int[] id_s=new int[id.length];
+		JSONObject jsonObject=new JSONObject();
+		for(int i=0;i<id.length;i++)
+		{
+			int ID=Integer.parseInt(id[i]);
+			id_s[i]=ID;
+		}
+		if(categoryService.deleteCategory(id_s))
+			jsonObject.put("success", true);
+		return jsonObject;
 	}
 }
