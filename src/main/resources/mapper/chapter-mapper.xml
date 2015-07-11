@@ -9,8 +9,14 @@
 			order by ${sort} ${order}
 		</if>  -->
 	</select>
-		<select id="getChapterByID" resultType="java.util.HashMap">        
+	<select id="getChapterByID" resultType="java.util.HashMap">        
 		select * from tbl_chapter where ID=${ID}
+	</select>
+	<select id="getChapterByCourseID" resultType="java.util.HashMap">        
+		select * from tbl_chapter where COURSE_ID=${COURSE_ID} and PID=0
+	</select>
+	<select id="getChapterByPID" resultType="java.util.HashMap">        
+		select * from tbl_chapter where PID=${PID}
 	</select>
 	
 </mapper>

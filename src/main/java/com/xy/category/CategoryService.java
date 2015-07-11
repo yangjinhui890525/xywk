@@ -51,7 +51,7 @@ public class CategoryService implements ICategoryService {
 		        HashMap<String, String> attMap = new HashMap<String, String>();
 		        tree.setAttributes(attMap);
 		        tree.setChildren(this.getTree(ctgList, 0));
-		        tree.setIconCls("icon-save");
+		       // tree.setIconCls("icon-save");
 		        treeMap.add(tree);
 		      }
 		    }
@@ -73,7 +73,7 @@ public class CategoryService implements ICategoryService {
 	            		temp.setText(ct.get("NAME").toString());
 	            		temp.setPid(pid);
 	    	             temp.setPid(temp.getId());
-	    	             temp.setIconCls("icon-save");
+	    	             //temp.setIconCls("icon-save");
 	    	              temp.setState("open");
 	    	              for (HashMap<String, Object> ctx : ctgList) {
 	    	            	  ctx.get("PID").toString().equals(ct.get("ID").toString());

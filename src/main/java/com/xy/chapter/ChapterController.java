@@ -15,6 +15,7 @@ import cn.com.iactive.db.DataGridModel;
 import com.xy.constants.AppConstants;
 import com.xy.util.ParamUtils;
 import com.xy.vo.RetVO;
+import com.xy.vo.Tree;
 
 @Controller
 @RequestMapping("/xy/chapter")
@@ -65,21 +66,30 @@ public class ChapterController {
 		    }
 		    return ret;
 	}
-	@RequestMapping(value="deleteChapter")
+	@RequestMapping(value="deleteChapterList")
 	@ResponseBody
-	public RetVO deleteChapter(HttpServletRequest request)
+	public RetVO deleteChapter(HttpServletRequest request,int ID)
 	{
 		RetVO ret=new RetVO();
-		try {
-			  int IDS[]=ParamUtils.getIntParameters(request, "PK", 0);
-			  boolean flag=chapterService.deleteChapter(IDS);
-			  ret.setSuccess(true);
+		try{
+		HashMap<String, Object> params=ParamUtils.getFilterParams(request);
+			  boolean flag=chapterService.deleteChapter(params);
+			  ret.setSuccess(flag);
 		  }catch (Exception e)
 		  {
 			  ret.setSuccess(false);
 		      ret.setMsg("error："+e.getMessage());
 		  }
 		  return ret;
+	}
+	@RequestMapping(value="getChapterTree")
+	@ResponseBody
+	public List<Tree> getChapterTree(HttpServletRequest request,int COURSE_ID)
+	{
+		HashMap<String, Object> params=new HashMap<String, Object>();
+		params.put("ID", COURSE_ID);
+		List<Tree> tree=chapterService.getChapterTree(params);
+		return tree;
 	}
 	
 }

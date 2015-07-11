@@ -250,7 +250,7 @@ function initTree() {
 <html>
 <head></head>
 <body class="easyui-layout">
-	<div data-options="region:'west',title:'目录管理',split:true,border:false" style="width:200px;" title="目录管理">
+	<div data-options="region:'west',title:'资源分类',split:true,border:false" style="width:200px;" title="资源分类">
 
 	<!-- 	<div style="text-align: center; padding-top: 10px;">
 			<button onclick="addFun();">添加</button>

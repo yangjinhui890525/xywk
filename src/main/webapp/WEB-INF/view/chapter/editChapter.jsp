@@ -13,7 +13,9 @@
 			parent.fq.progressBar('close');//关闭上传进度条
 			if (result.success) {
 				$pjq.messager.alert('提示','操作成功', 'info');
-				$grid.datagrid('reload');
+				//$grid.datagrid('reload');
+				updateTabs();
+				//window.parent.initTree($("#COURSE_ID").val());
 				$dialog.dialog('destroy');
 			} else {
 				$pjq.messager.alert('提示','操作失败', 'error');
@@ -32,8 +34,9 @@
 </head>
 <body>
 <form method="post" class="form">
-		<input type="hidden" value="${chapter['COURSE_ID']}" name="COURSE_ID">
+		<input type="hidden" value="${chapter['COURSE_ID']}" name="COURSE_ID" id="COURSE_ID">
 		<input type="hidden" value="${chapter['ID']}" name="ID">
+		<input type="hidden" value="${chapter['PID']}" name="PID">
 		<fieldset>
 			<legend>章节信息</legend>
 			<table class="table" style="width: 100%;">

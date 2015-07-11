@@ -4,6 +4,7 @@ public interface DBTableConstants {
   /*
    * 用户表
    */
+  String ID="ID";
   String TBL_USER_NAME = "tbl_user";
   String TBL_USER_PK = "ID";
   String TBL_CATEGORY_NAME="tbl_category";
@@ -12,4 +13,5 @@ public interface DBTableConstants {
   String TBL_COURSE_PKE="ID";
   String TBL_CHAPTER_NAME="tbl_chapter";
   String TBL_CHAPTER_PKE="ID";
+  String TBL_CHAPTERUNIT_NAME="tbl_chapter_unit";
 }
