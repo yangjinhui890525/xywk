@@ -20,3 +20,4 @@ html>body {font-size: 12px;
 .resource_book{width: 150px;height: 200px; padding: 10px 50px;} 
 .ui-input{width: 210px;height: 30px;}
 .ui-label{width: 85px;display: inline-block;margin-left: 15px;}
+.radio_label{vertical-align: super;}

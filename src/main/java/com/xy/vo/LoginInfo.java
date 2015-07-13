@@ -1,12 +1,21 @@
 package com.xy.vo;
 
+import java.util.HashMap;
+
 public class LoginInfo implements java.io.Serializable{
   private int userId = 0;
   private String username;
   private String password;
   private String truename;
   private int type;
-  public int getUserId() {
+  private HashMap<String, Object> chapter_unit;
+  public HashMap<String, Object> getChapter_unit() {
+	return chapter_unit;
+}
+public void setChapter_unit(HashMap<String, Object> chapter_unit) {
+	this.chapter_unit = chapter_unit;
+}
+public int getUserId() {
     return userId;
   }
   public void setUserId(int userId) {

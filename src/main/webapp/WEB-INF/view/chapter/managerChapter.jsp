@@ -9,7 +9,6 @@ $(function() {
 	var queryData = {
 			COURSE_ID : COURSE_ID
 		};
-	$("#search").show();
 	initTree(COURSE_ID);
 	//loadGrid(queryData);
 });
@@ -47,6 +46,8 @@ function initResData(id,text,pid)
 	var queryData={
 		PID:id
 	};	
+	$("#search").show();
+	$("#PID").val(id);
 	loadGrid(queryData);
 }
 function loadGrid(queryData){
@@ -151,6 +152,15 @@ function deleteFun()
         }});
 
 }
+function searchList() {
+	var PID=$("#PID").val();
+	var name=$("#name").val();
+	var queryData = {
+		PID:PID,
+		NAME:name
+	};
+	loadGrid(queryData);
+}
 </script>
 </head>
 <body class="easyui-layout">
@@ -168,20 +178,10 @@ function deleteFun()
 	</div>
 <div region="center">
 	<div data-options="region:'center',border:false" id="flList">
-		<div id="search" class="search" style="height: 100px; display: none;">
+		<div id="search" class="search" style="height: 54px; display: none;">
 						<div style="margin-left: 10px;">
-		
-							时间： <input name="START_TIME" id="START_TIME"
-								onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'})">
-							&nbsp;至&nbsp; <input name="END_TIME" id="END_TIME"
-								onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'});">&nbsp;
-							&nbsp;&nbsp;<br> 名称： <input name="name" id="name">
-							&nbsp;&nbsp; 状态： <select name="status" id="status"
-								style="width: 160px; height: 40px;">
-								<option value="-1">&nbsp;</option>
-								<option value="0">待推送</option>
-								<option value="1">已推送</option>
-							</select> &nbsp; &nbsp; 
+							<input type="hidden" name="PID" value="" id="PID">
+							&nbsp;&nbsp; 名称： <input name="name" id="name">
 							<a href="#" class="easyui-linkbutton" id="searchBtn"onclick="searchList();">查询</a>
 						</div>
 		
@@ -190,7 +190,8 @@ function deleteFun()
 			<table id="chapterTable">
 				<thead>
 					<tr>
-						<th data-options="field:'ID',title:'知识点ID',width:10" sortable="true"></th>
+						<th data-options="field:'ID',title:'ID',width:10" sortable="true"></th>
+						<th data-options="field:'NAME',title:'知识点名称',width:15" sortable="true"></th>
 						<th data-options="field:'P_URL',title:'知识点URL',width:15" sortable="true"></th>
 						<th data-options="field:'DESCRIPTION',title:'描述',width:10"></th>
 					</tr>

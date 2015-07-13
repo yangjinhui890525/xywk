@@ -57,7 +57,7 @@ public class FileUtils extends Object {
      * @param str String
      * @throws FileNotFoundException
      */
-    public void WriteFile(String filePath, String str) throws
+    public void   WriteFile(String filePath, String str) throws
             FileNotFoundException {
         path = filePath;
         try {
@@ -256,5 +256,20 @@ public class FileUtils extends Object {
 		}
 		
 	}
+  public static boolean createFile(File fileName)throws Exception{  
+	  boolean flag=false;  
+	  if (!fileName.getParentFile().exists()) {
+		  fileName.getParentFile().mkdirs();
+		  }
+	  try{  
+	   if(!fileName.exists()){  
+	    fileName.createNewFile();  
+	    flag=true;  
+	   }  
+	  }catch(Exception e){  
+	   e.printStackTrace();  
+	  }  
+	  return flag;  
+	 }   
   
 }

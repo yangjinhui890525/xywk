@@ -1,3 +1,4 @@
+<%@page import="com.xy.vo.LoginInfo"%>
 <%@page import="java.io.File"%>   
 <%@page import="java.util.UUID"%>   
 <%@page import="org.apache.commons.fileupload.FileItem"%>   
@@ -26,14 +27,14 @@ if(ServletFileUpload.isMultipartContent(request)){
     FileItemFactory factory = new DiskFileItemFactory();   
     ServletFileUpload servletFileUpload = new ServletFileUpload(factory);   
     servletFileUpload.setHeaderEncoding("UTF-8");//解决文件名乱码的问题   
-    List<FileItem> fileItemsList = servletFileUpload.parseRequest(request);   
+    List<FileItem> fileItemsList = servletFileUpload.parseRequest(request);  
+    LoginInfo info=(LoginInfo)request.getSession().getAttribute("info");
     for (FileItem item : fileItemsList) {   
         if (!item.isFormField()) {   
             String fileName = item.getName();   
             fileName = "file" + System.currentTimeMillis() + fileName.substring(fileName.lastIndexOf("."));   
             //定义文件路径，根据你的文件夹结构，可能需要做修改   
-            String clientPath = "commons/ckeditor/uploader/upload/" + type + fileName;   
-  
+            String clientPath = "upload/"+info.getChapter_unit().get("COURSE_ID")+"/"+info.getChapter_unit().get("CHAPTER_ID")+"/" + type + fileName;   
             //保存文件到服务器上   
             File file = new File(request.getSession().getServletContext().getRealPath(clientPath));   
             if (!file.getParentFile().exists()) {   

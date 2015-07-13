@@ -164,25 +164,19 @@ function initTree() {
 				text:'添加',
 				iconCls:'icon-add',
 				handler:function(){
-					addrow('添加资源科目','/xy/course/editCourse?CATEGORY_ID='+queryData.category_id,'courseTable',400,300);
+					addrow('添加资源科目','/xy/course/editCourse?CATEGORY_ID='+queryData.category_id,'courseTable',600,400);
 				}
 			},'-',{
 				text:'编辑',
 				iconCls:'icon-edit',
 				handler:function(){
-					updaterow('编辑添加资源科目','/xy/course/editCourse','courseTable','ID',400,300);
+					updaterow('编辑添加资源科目','/xy/course/editCourse','courseTable','ID',600,400);
 				}
 			},'-',{
 				text:'删除',
 				iconCls:'icon-remove',
 				handler:function(){
 					deleterow(fq.contextPath+'/xy/course/deleteCourse','courseTable','ID');
-				}
-			},'-',{
-				text:'设置用户状态',
-				iconCls:'icon-edit',
-				handler:function(){
-					updateValidrow('manager/user/setUserValid','courseTable','ID');
 				}
 			},'-',
 			{

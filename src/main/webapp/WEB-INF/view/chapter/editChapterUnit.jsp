@@ -10,7 +10,7 @@
 	var submitNow = function($dialog, $grid, $pjq) {
 		var url;
 		url = fq.contextPath + '/xy/chapterunit/saveChapterUnit';
-		$.post(url, fq.serializeObject($('form')), function(result) {
+		$.post(url, getData(fq.serializeObject($('form'))), function(result) {
 			parent.fq.progressBar('close');//关闭上传进度条
 			if (result.success) {
 				$pjq.messager.alert('提示','操作成功', 'info');
@@ -27,10 +27,19 @@
 			submitNow($dialog, $grid, $pjq);
 		}
 	};
+	function getData(data)
+	{
+	/* 	alert(fq.serializeObject($('form')));
+		alert($("form").serialize());
+		alert(CKEDITOR.instances.P_URL.getData()); */
+		data['P_URL']=CKEDITOR.instances.P_URL.getData();
+		return data;
+		
+	}
 </script>
 </head>
 <body>
-<form method="post" class="form">
+<form method="post" action="../../xy/chapterunit/saveChapterUnit">
 		<input type="hidden" value="${chapterUnit['COURSE_ID']}" name="COURSE_ID" id="COURSE_ID">
 		<input type="hidden" value="${chapterUnit['ID']}" name="ID">
 		<input type="hidden" value="${chapterUnit['CHAPTER_ID']}" name="CHAPTER_ID">
@@ -38,18 +47,19 @@
 			<legend>知识点信息</legend>
 			<table class="table" style="width: 100%;">
 				<tr>
-					<th>章节名称</th>
+					<th>知识点名称</th>
 					<td><input name="NAME"  type="text" class="easyui-validatebox" data-options="required:true" value="${chapterUnit['NAME']}"/>
 					</td>
 				</tr>
 				<tr>
 					<th>描述</th>
-					<td><input name="DESCRIPTION" type="text" class="easyui-validatebox" data-options="required:true" value="${chapterUnit['DESCRIPTION']}"/>
+					<td><input name="MEMO" type="text" class="easyui-validatebox" data-options="required:true" value="${chapterUnit['DESCRIPTION']}"/>
 					</td>
 				</tr>
 			</table>
 		</fieldset>
-		<ckeditor:editor editor="P_URL" basePath="../../commons/ckeditor/" value=" "></ckeditor:editor>
+		<ckeditor:editor editor="P_URL" basePath="../../commons/ckeditor/" value="  "/>
 	</form>
+<%-- 	<ckeditor:replace replace="P_URL" basePath="../../commons/ckeditor/" /> --%>
 </body>
 </html>

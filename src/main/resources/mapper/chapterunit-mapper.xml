@@ -5,6 +5,9 @@
 <mapper namespace="ChapterUnitMapper">
 	<select id="getChapterUnitList" resultType="java.util.HashMap">        
 		select * from tbl_chapter_unit where CHAPTER_ID=${PID}
+		<if test="NAME != null">
+			and NAME like '%${NAME}%'
+		</if>
 	</select>
 	<select id="getChapterUnitById" resultType="java.util.HashMap">        
 		select * from tbl_chapter_unit where ID=${ID}

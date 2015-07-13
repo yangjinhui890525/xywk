@@ -2,6 +2,8 @@ package com.xy.chapterunit;
 
 import java.util.HashMap;
 
+import javax.servlet.http.HttpServletRequest;
+
 import cn.com.iactive.db.DataGridModel;
 
 public interface IChapterUnitService {
@@ -13,5 +15,13 @@ public interface IChapterUnitService {
 			HashMap<String, Object> chapterUnit);
 
 	boolean saveChapterUnit(HashMap<String, Object> chapterUnit);
+
+	String createChapterUnitHtml(HashMap<String, Object> chapterUnit,HttpServletRequest request);
+
+	long saveChapterUnitID(HashMap<String, Object> chapterUnit);
+
+	boolean updateChapterUnit(HashMap<String, Object> chapterUnitInsert);
+
+	boolean deleteChapterUnit(HashMap<String, Object> params);
 
 }

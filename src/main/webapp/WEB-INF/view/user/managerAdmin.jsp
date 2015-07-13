@@ -44,12 +44,6 @@
 				handler:function(){
 					deleterow('${pageContext.request.contextPath}/xy/user/deleteAdminUser','userTable','ID');
 				}
-			},'-',{
-				text:'设置用户状态',
-				iconCls:'icon-edit',
-				handler:function(){
-					updateValidrow('manager/user/setUserValid','userTable','ID');
-				}
 			},'-'
 			],
 			

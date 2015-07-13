@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -64,6 +65,18 @@
 					<th>手机号码</th>
 					<td>
 						<input name="MPHONE" type="text" value="${user['MPHONE']}"/>
+					</td>
+				</tr>
+				<tr>
+					<th>是否有效</th>
+					<td>
+						<c:if test="${empty user['IS_VALID'] || user['IS_VALID']==1}">
+							<input name="IS_VALID" type="radio" value="1" checked="checked"/><span class="radio_label">是</span> <input name="IS_VALID" type="radio" value="0"/><span class="radio_label">否</span>	
+						</c:if>
+						<c:if test="${!(empty user['IS_VALID'] || user['IS_VALID']==1)}">
+							<input name="IS_VALID" type="radio" value="1"/><span class="radio_label">是</span> <input name="IS_VALID" type="radio" value="0" checked="checked"/><span class="radio_label">否</span>
+						</c:if>
+						
 					</td>
 				</tr>
 			</table>

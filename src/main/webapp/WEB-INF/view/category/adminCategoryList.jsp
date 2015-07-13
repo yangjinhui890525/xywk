@@ -249,7 +249,7 @@ $(function() {
 				<td id="td1" style="display: none; cursor: pointer;">
 					<div id="tdiv1" style="position: relative; width: 124px; height: 175px;"
 						title="点击进行目录及资源管理">
-						<img src="${pageContext.request.contextPath}/images/book.jpg"
+						<img src="${pageContext.request.contextPath}/images/fm.png"
 							width="124" height="176" alt=""> <span id="sp1"
 							style="position: absolute; top: 60px; left: 5px; right: 5px; font-weight: bold;">
 						</span>
@@ -258,7 +258,7 @@ $(function() {
 				<td id="td2" style="display: none; cursor: pointer;">
 					<div id="tdiv2" style="position: relative; width: 124px; height: 175px;"
 						title="点击进行目录及资源管理">
-						<img src="${pageContext.request.contextPath}/images/book.jpg"
+						<img src="${pageContext.request.contextPath}/images/fm.png"
 							width="124" height="176" alt=""> <span id="sp2"
 							style="position: absolute; top: 60px; left: 5px; right: 5px; font-weight: bold;">
 						</span>
@@ -267,7 +267,7 @@ $(function() {
 				<td id="td3" style="display: none; cursor: pointer;">
 					<div id="tdiv3" style="position: relative; width: 124px; height: 175px;"
 						title="点击进行目录及资源管理">
-						<img src="${pageContext.request.contextPath}/images/book.jpg"
+						<img src="${pageContext.request.contextPath}/images/fm.png"
 							width="124" height="176" alt=""> <span id="sp3"
 							style="position: absolute; top: 60px; left: 5px; right: 5px; font-weight: bold;">
 						</span>
@@ -276,7 +276,7 @@ $(function() {
 				<td id="td0" style="display: none; cursor: pointer;">
 					<div id="tdiv0" style="position: relative; width: 124px; height: 175px;"
 						title="点击进行目录及资源管理">
-						<img src="${pageContext.request.contextPath}/images/book.jpg"
+						<img src="${pageContext.request.contextPath}/images/fm.png"
 							width="124" height="176" alt=""> <span id="sp0"
 							style="position: absolute; top: 60px; left: 5px; right: 5px; font-weight: bold;">
 						</span>
