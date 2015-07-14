@@ -43,5 +43,7 @@ public class CourseService implements ICourseService{
 		}
 		iacDB.deleteBatchDynamic(DBTableConstants.TBL_COURSE_NAME, DBTableConstants.TBL_COURSE_PKE, list);
 	}
-
+	public List<HashMap<String, Object>> getCourseDateByCategroyIDNoPage(HashMap<String, Object> params) {
+			return iacDB.getList("getCourseList", params);
+		}
 }

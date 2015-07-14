@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.xy.vo.Tree;
 @Controller
@@ -19,8 +20,10 @@ public class SubjectController {
 		return "subject/list";
 	}
 	@RequestMapping(value="getTree")
+	@ResponseBody
 	public List<Tree> getTree()
 	{
-		return null;
+		List<Tree> tree=subjectService.getBaseTree();
+		return tree;
 	}
 }
