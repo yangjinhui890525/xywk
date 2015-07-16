@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="DicMapper">
+	<select id="getDicByType" resultType="java.util.HashMap">        
+		select * from tbl_dic where DIC_TYPE=#{DIC_TYPE} order by NID asc
+	</select>
+	<select id="getValueByTypeAndNid" resultType="java.util.HashMap">
+	    select a.NAME from tbl_dic  a where a.DIC_TYPE=#{DIC_TYPE} and a.NID=${NID}
+	</select>
+	<select id="getAllDic" resultType="java.util.HashMap">
+	     select * from tbl_dic order by DIC_TYPE
+	</select>
+
+</mapper>

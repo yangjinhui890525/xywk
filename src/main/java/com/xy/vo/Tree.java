@@ -19,6 +19,14 @@ public class Tree implements Serializable,Comparable{
 	private List<Tree> children;
 	private String iconCls;
 	private int pid;
+	private boolean checkebox = false;
+	public boolean isCheckebox() {
+		return checkebox;
+	}
+	public void setCheckebox(boolean checkebox) {
+		this.checkebox = checkebox;
+	}
+
 	private int orderNum = 0;
 	
 	public int getId() {

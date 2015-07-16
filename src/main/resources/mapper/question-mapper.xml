@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="QuestionMapper">
+	<select id="getQuestionList" resultType="java.util.HashMap">        
+		select q.* from tbl_question as q left join tbl_relation as r ON q.ID=r.QUESTION_ID where r.CHAPTER_UNIT_ID=${CHAPTER_UNIT_ID}
+	</select>
+	<select id="getQuestionById" resultType="java.util.HashMap">
+	    select * from tbl_question where ID=${ID}
+	</select>
+</mapper>

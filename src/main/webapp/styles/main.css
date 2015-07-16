@@ -21,3 +21,5 @@ html>body {font-size: 12px;
 .ui-input{width: 210px;height: 30px;}
 .ui-label{width: 85px;display: inline-block;margin-left: 15px;}
 .radio_label{vertical-align: super;}
+.align_top{vertical-align: top}
+.align_middle{vertical-align: middle;}

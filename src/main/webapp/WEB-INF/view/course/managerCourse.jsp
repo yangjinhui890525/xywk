@@ -195,7 +195,23 @@ function initTree() {
 					
 					var event={COURSE_ID:rows[0]['ID'],name:rows[0]['NAME']}
 					operation(event);
-				}},'-'
+				}},'-',
+				{
+					text:'题目管理',
+					iconCls:'icon-add',
+					handler:function(){
+						var rows = $('#courseTable').datagrid('getSelections');
+						if(rows.length==0){
+							$.messager.alert('提示',"请选择要编辑的数据",'info');
+							return;
+						}
+						if(rows.length > 1){
+							$.messager.alert('提示',"只能选择一行数据进行编辑",'info');
+							return;
+						}
+						var event={COURSE_ID:rows[0]['ID'],name:rows[0]['NAME']}
+						operationObject(event);
+					}},'-'
 			],
 			
 			onBeforeLoad : function(param) {
@@ -227,6 +243,27 @@ function initTree() {
 		};
 		if (tabs.tabs('exists', name+"的章节管理")) {
 			tabs.tabs('select', name+"的章节管理");
+		} else {
+			tabs.tabs('add', opts);
+		}
+	}
+ function operationObject(event) {
+		var name = event.name;
+		var COURSE_ID = event.COURSE_ID;
+		var encname = encodeURI(name);
+		var url = fq.contextPath+'/xy/question/list?COURSE_ID='+COURSE_ID;
+		//self.parent.addTab(name+'资源管理',url,'');
+		var tabs = parent.$('#mainTabs');
+		var opts = {
+			title : name+"的题目管理",
+			closable : true,
+			/* iconCls : node.iconCls, */
+			content : fq.formatString('<iframe src="{0}" allowTransparency="true" style="border:0;width:100%;height:99%;" frameBorder="0"></iframe>', url),
+			border : false,
+			fit : true
+		};
+		if (tabs.tabs('exists', name+"的题目管理")) {
+			tabs.tabs('select', name+"的题目管理");
 		} else {
 			tabs.tabs('add', opts);
 		}

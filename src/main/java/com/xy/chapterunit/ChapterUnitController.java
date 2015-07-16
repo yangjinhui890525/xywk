@@ -15,6 +15,7 @@ import cn.com.iactive.db.DataGridModel;
 import com.xy.util.ParamUtils;
 import com.xy.vo.LoginInfo;
 import com.xy.vo.RetVO;
+import com.xy.vo.Tree;
 
 @Controller
 @RequestMapping("/xy/chapterunit")
@@ -85,5 +86,14 @@ public class ChapterUnitController {
 			      ret.setMsg("error："+e.getMessage());
 	}
 		 return ret;
+	}
+	@RequestMapping(value="getChapterUnitTree")
+	@ResponseBody
+	public List<Tree> getChapterUnitTree(int COURSE_ID,HttpServletRequest httpServletRequest)
+	{
+		HashMap<String, Object> params=new HashMap<String, Object>();
+		params.put("ID", COURSE_ID);
+		List<Tree> tree=chapterUnitService.getChapterTree(params);
+		return tree;
 	}
 }

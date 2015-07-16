@@ -14,4 +14,7 @@ public interface DBTableConstants {
   String TBL_CHAPTER_NAME="tbl_chapter";
   String TBL_CHAPTER_PKE="ID";
   String TBL_CHAPTERUNIT_NAME="tbl_chapter_unit";
+  String TBL_QUESTION_NAME="tbl_question";
+  String TBL_RELATION_NAME="tbl_relation";
+  String TBL_QUESTION_ITEM_NAME="tbl_question_item";
 }

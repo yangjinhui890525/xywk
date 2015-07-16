@@ -29,12 +29,8 @@
 	};
 	function getData(data)
 	{
-	/* 	alert(fq.serializeObject($('form')));
-		alert($("form").serialize());
-		alert(CKEDITOR.instances.P_URL.getData()); */
 		data['P_URL']=CKEDITOR.instances.P_URL.getData();
 		return data;
-		
 	}
 </script>
 </head>

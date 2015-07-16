@@ -1,8 +1,11 @@
 package com.xy.chapterunit;
 
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+
+import com.xy.vo.Tree;
 
 import cn.com.iactive.db.DataGridModel;
 
@@ -23,5 +26,7 @@ public interface IChapterUnitService {
 	boolean updateChapterUnit(HashMap<String, Object> chapterUnitInsert);
 
 	boolean deleteChapterUnit(HashMap<String, Object> params);
+
+	List<Tree> getChapterTree(HashMap<String, Object> params);
 
 }
